@@ -78,8 +78,8 @@ class SocialGrant extends AbstractGrant
      */
     public function validateUser(ServerRequestInterface $request): UserEntity
     {
-        $provider = $this->getRequestParameter('provider', $request);
-        if (is_null($provider)) {
+        $social_media = $this->getRequestParameter('social_media', $request);
+        if (is_null($social_media)) {
             throw OAuthServerException::invalidRequest('provider');
         }
 
@@ -89,7 +89,7 @@ class SocialGrant extends AbstractGrant
         }
 
         $user = $this->resolver->resolveUserByProviderCredentials(
-            $provider, 
+            $social_media, 
             $accessToken, 
             $this->getRequestParameter('user_id', $request),
             $this->getRequestParameter('directory_id', $request)
